@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Image Slider</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <section class="slider-container">
+    <div class="slider-images">
+      <div class="slider-img" value="1" data-start="0">
+        <img src="Images/1.png" alt="1" />
+        <h1>Diane</h1>
+        <div class="details">
+          <h2>Giant Queen Diane</h2>
+          <p>The Serpent's Sin of Envy</p>
+        </div>
+      </div>
+      <div class="slider-img" value="2" data-start="11">
+        <img src="Images/2.png" alt="2" />
+        <h1>King</h1>
+        <div class="details">
+          <h2>Harlequin</h2>
+          <p>The Grizzly's Sin of Sloth </p>
+        </div>
+      </div>
+      <div class="slider-img" value="3" data-start="0">
+        <img src="Images/3.png" alt="3" />
+        <h1>Ban</h1>
+        <div class="details">
+          <h2>Undead Ban</h2>
+          <p>The Fox's Sin of Greed </p>
+        </div>
+      </div>
+      <div class="slider-img active" value="4" data-start="0">
+        <img src="Images/4.png" alt="4" />
+        <h1>Meliodas</h1>
+        <div class="details">
+          <h2>Demon King Meliodas</h2>
+          <p>The Dragon's Sin of Wrath</p>
+        </div>
+      </div>
+      <div class="slider-img" value="5" data-start="6">
+        <img src="Images/5.png" alt="5" />
+        <h1>Gowther</h1>
+        <div class="details">
+          <h2>Gowther The Doll</h2>
+          <p>The Goat's Sin of Lust </p>
+        </div>
+      </div>
+      <div class="slider-img" value="6" data-start="0">
+        <img src="Images/6.png" alt="6" />
+        <h1>Escanor</h1>
+        <div class="details">
+          <h2>Sun's son Escanor</h2>
+          <p>The Lion's Sin of Pride </p>
+        </div>
+      </div>
+      <div class="slider-img" value="7" data-start="0">
+        <img src="Images/7.png" alt="7" />
+        <h1>Merlin</h1>
+        <div class="details">
+          <h2>Merlin</h2>
+          <p>The Boar's Sin of Gluttony </p>
+        </div>
+      </div>
+    </div>
+
+    <video class="video-background" id="videoBackground" loop>
+      <source src="./videos/4.mp4" type="video/mp4">
+    </video>
+
+  </section>
+  <script src="js/jQuery.js"></script>
+  <script>
+    jQuery(document).ready(function ($) {
+      const $videoBackground = $('#videoBackground');
+      $(".slider-img").on("click", function () {
+        $(".slider-img").removeClass("active");
+        $(this).addClass("active");
+
+        const videoSrc = "./videos/" + $(this).attr('value') + ".mp4";
+        const startTime = $(this).data('start');
+        $videoBackground.attr('src', videoSrc);
+        $videoBackground.show();
+        $videoBackground[0].currentTime = startTime;
+        $videoBackground[0].play();
+      });
+
+      $('body').on('click', function () {
+        if (document.documentElement.requestFullscreen) {
+          document.documentElement.requestFullscreen();
+        } else if (document.documentElement.mozRequestFullScreen) {
+          document.documentElement.mozRequestFullScreen();
+        } else if (document.documentElement.webkitRequestFullscreen) {
+          document.documentElement.webkitRequestFullscreen();
+        } else if (document.documentElement.msRequestFullscreen) {
+          document.documentElement.msRequestFullscreen();
+        }
+      });
+      const $sliderImage = $(".slider-images");
+      $(document.body).on("keydown", function (event) {
+        if (event.key === "h") {
+          if ($sliderImage.css("display") === "none") {
+            $sliderImage.css("display", "flex");
+          } else {
+            $sliderImage.css("display", "none");
+          }
+        }
+      });
+    });
+
+  </script>
+</body>
+
+</html>
